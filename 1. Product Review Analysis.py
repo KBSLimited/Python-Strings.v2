@@ -60,3 +60,35 @@ for review in reviews:
     print()  # For spacing between reviews
 
 #Task 3: Review Summary
+def summarize_review(review, max_length=30):
+    # Check if the review length is less than or equal to the max length
+    if len(review) <= max_length:
+        return review
+    
+    # Truncate to the max length
+    truncated_review = review[:max_length]
+    
+    # Check if the last character is a space or part of a word
+    if truncated_review[-1] != " " and " " in truncated_review:
+        # Find the last space within the truncated review
+        last_space = truncated_review.rfind(" ")
+        truncated_review = truncated_review[:last_space]
+    
+    # Append "…" to indicate the summary is truncated
+    return truncated_review + "…"
+
+# Example usage:
+reviews = [
+    "This product is really good. I'm impressed with its quality.",
+    "The performance of this product is excellent. Highly recommended!",
+    "I had a bad experience with this product. It didn't meet my expectations.",
+    "Poor quality product. Wouldn't recommend it to anyone.",
+    "The product was average. Nothing extraordinary about it."
+]
+
+# Create summaries for each review
+for review in reviews:
+    summary = summarize_review(review)
+    print(f"Original review: {review}")
+    print(f"Summary: {summary}")
+    print()
